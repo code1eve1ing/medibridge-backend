@@ -1,0 +1,15 @@
+Your appointment is confirmed — MediBridge
+
+Hi {{ patient.first_name }},
+
+Your consultation has been scheduled.
+
+Doctor:      Dr. {{ doctor.first_name }} {{ doctor.last_name }}
+Date & Time: {{ appointment.scheduled_start }}
+Payment Ref: {{ appointment.payment_ref }}
+
+Join your consultation (active 15 minutes before the start time):
+{{ meeting_link }}
+
+---
+MediBridge — Online Medical Consultations

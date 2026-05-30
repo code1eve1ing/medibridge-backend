@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  @page { size: A4; margin: 25mm 20mm; }
+  body { font-family: Helvetica, Arial, sans-serif; font-size: 11px; color: #1a1a1a; }
+  .header-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; }
+  .brand { font-size: 22px; font-weight: bold; color: #0d9488; }
+  .doc-title { font-size: 14px; font-weight: bold; color: #374151; margin-top: 2px; }
+  .subtitle { font-size: 10px; color: #6b7280; }
+  .divider { border: none; border-top: 2px solid #0d9488; margin: 12px 0; }
+  .section-title { font-size: 10px; font-weight: bold; text-transform: uppercase;
+                   letter-spacing: 0.08em; color: #6b7280; margin: 14px 0 6px; }
+  table.info { width: 100%; border-collapse: collapse; }
+  table.info td { padding: 4px 6px; font-size: 11px; vertical-align: top; }
+  table.info td.label { color: #6b7280; width: 35%; }
+  table.info td.value { color: #111827; font-weight: 500; }
+  .highlight-box { background-color: #f0fdf4; border: 1px solid #6ee7b7;
+                   border-radius: 4px; padding: 10px 14px; margin: 14px 0; }
+  .code { font-family: Courier, monospace; font-size: 13px; font-weight: bold;
+          color: #0d9488; letter-spacing: 0.1em; }
+  .qr-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .footer { margin-top: 28px; font-size: 9px; color: #9ca3af; border-top: 1px solid #e5e7eb; padding-top: 8px; }
+  .validity-badge { background-color: #0d9488; color: white; font-size: 10px;
+                    font-weight: bold; padding: 3px 8px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<table class="header-table">
+  <tr>
+    <td>
+      <div class="brand">MediBridge</div>
+      <div class="doc-title">Surgery Package Voucher</div>
+      <div class="subtitle">Online Medical &amp; Surgical Consultations</div>
+    </td>
+    <td style="text-align:right; vertical-align:top;">
+      <div style="font-size:10px; color:#6b7280;">Voucher #{{ booking.id }}</div>
+      <div style="font-size:10px; color:#6b7280; margin-top:3px;">Issued: {{ coupon.issued_at|date:"d M Y" }}</div>
+      <div style="margin-top:5px;"><span class="validity-badge">CONFIRMED</span></div>
+    </td>
+  </tr>
+</table>
+<hr class="divider"/>
+
+<!-- Package Details -->
+<div class="section-title">Package Details</div>
+<table class="info">
+  <tr><td class="label">Package</td><td class="value">{{ booking.package.name }}</td></tr>
+  <tr><td class="label">Surgery Type</td><td class="value">{{ booking.package.surgery_type }}</td></tr>
+  <tr><td class="label">Hospital</td><td class="value">{{ booking.package.hospital.name }}, {{ booking.package.hospital.city }}</td></tr>
+  <tr><td class="label">Duration</td><td class="value">{{ booking.package.total_duration_days }} days ({{ booking.package.hospital_stay_days }} hospital + {{ booking.package.recovery_stay_days }} recovery)</td></tr>
+  <tr><td class="label">Tentative Date</td><td class="value">{{ booking.tentative_date|date:"d M Y" }}</td></tr>
+  <tr><td class="label">Package Price</td><td class="value">USD {{ booking.total_amount_usd }}</td></tr>
+</table>
+
+<!-- Patient Details -->
+<div class="section-title">Patient Details</div>
+<table class="info">
+  <tr><td class="label">Name</td><td class="value">{{ booking.patient.first_name }} {{ booking.patient.last_name }}</td></tr>
+  <tr><td class="label">Email</td><td class="value">{{ booking.patient.user.email }}</td></tr>
+  {% if booking.travel_info %}
+  <tr><td class="label">Passport (last 4)</td><td class="value">****{{ passport_last4 }}</td></tr>
+  <tr><td class="label">Passport Country</td><td class="value">{{ booking.travel_info.passport_country }}</td></tr>
+  <tr><td class="label">Visa Required</td><td class="value">{% if booking.travel_info.visa_required %}Yes{% else %}No{% endif %}</td></tr>
+  {% endif %}
+</table>
+
+<!-- Voucher Code -->
+<div class="highlight-box">
+  <table style="width:100%; border-collapse:collapse;">
+    <tr>
+      <td style="vertical-align:middle;">
+        <div style="font-size:10px; color:#047857; font-weight:bold; margin-bottom:4px;">VOUCHER CODE</div>
+        <div class="code">{{ coupon.code }}</div>
+        <div style="font-size:9px; color:#6b7280; margin-top:4px;">
+          Valid: {{ coupon.valid_from|date:"d M Y" }} — {{ coupon.valid_until|date:"d M Y" }}
+        </div>
+      </td>
+      <td style="text-align:right; width:100px; vertical-align:middle;">
+        <img src="{{ qr_uri }}" width="90" height="90" alt="QR Code"/>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- Inclusions -->
+<div class="section-title">What's Included</div>
+<table class="info">
+  {% if booking.package.includes_flight %}
+  <tr><td class="label">Flights</td><td class="value">{{ booking.package.flight_class|title }} class</td></tr>
+  {% endif %}
+  {% if booking.package.includes_accommodation %}
+  <tr><td class="label">Accommodation</td><td class="value">{{ booking.package.get_accommodation_type_display }}</td></tr>
+  {% endif %}
+  {% if booking.package.includes_transport %}<tr><td class="label">Airport Transfer</td><td class="value">Included</td></tr>{% endif %}
+  {% if booking.package.includes_visa_assistance %}<tr><td class="label">Visa Assistance</td><td class="value">Included</td></tr>{% endif %}
+  {% if booking.package.includes_meals %}<tr><td class="label">Meals</td><td class="value">Included</td></tr>{% endif %}
+</table>
+
+<!-- Footer -->
+<div class="footer">
+  <p>This voucher is issued by MediBridge and is non-transferable. Please present this document upon arrival at the hospital.
+  Contact support@medibridge.local for queries. Reference Booking ID: {{ booking.id }}.</p>
+  <p>MediBridge — Online Medical &amp; Surgical Consultations | support@medibridge.local</p>
+</div>
+
+</body>
+</html>

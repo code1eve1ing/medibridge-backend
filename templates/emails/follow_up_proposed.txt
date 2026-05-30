@@ -1,0 +1,13 @@
+Follow-up consultation proposed — MediBridge
+
+Hi {{ follow_up.patient.first_name }},
+
+Dr. {{ doctor.first_name }} {{ doctor.last_name }} has proposed a follow-up consultation for you.
+
+Date & Time: {{ follow_up.scheduled_start }}
+Fee: {% if follow_up.fee_waived %}Waived (no payment required){% else %}Standard fee applies{% endif %}
+
+Log in to MediBridge to confirm this appointment.
+
+---
+MediBridge — Online Medical Consultations

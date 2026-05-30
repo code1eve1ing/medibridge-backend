@@ -1,0 +1,14 @@
+New appointment scheduled — MediBridge
+
+Hi Dr. {{ doctor.first_name }},
+
+A patient has booked a consultation with you.
+
+Patient:     {{ patient.first_name }} {{ patient.last_name }}
+Date & Time: {{ appointment.scheduled_start }}
+
+Join your consultation (active 15 minutes before the start time):
+{{ meeting_link }}
+
+---
+MediBridge — Online Medical Consultations

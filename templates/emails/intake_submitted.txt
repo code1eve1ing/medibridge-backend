@@ -1,0 +1,8 @@
+New symptom intake submitted — {{ platform_name }}
+
+Patient: {{ patient.user.email }}
+Severity: {{ intake.severity }}
+Chief complaint: {{ intake.chief_complaint }}
+Duration: {{ intake.duration }}
+
+Review: {{ site_url }}/admin/intakes

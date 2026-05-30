@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Doctor Invitation — {{ platform_name }}</title></head>
+<body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
+  <h2 style="color: #0d9488;">You've been invited to join {{ platform_name }}</h2>
+  <p>Hi there,</p>
+  <p>
+    You have been invited by <strong>{{ invited_by.email }}</strong> to join {{ platform_name }} as a doctor.
+    {{ platform_name }} connects patients from Canada, the US, and the UK with qualified Indian doctors for online consultations.
+  </p>
+  <p>Click the button below to complete your registration. This invitation expires in 7 days.</p>
+  <p style="text-align: center; margin: 30px 0;">
+    <a href="{{ signup_url }}"
+       style="background-color: #0d9488; color: #fff; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+      Accept Invitation &amp; Sign Up
+    </a>
+  </p>
+  <p style="color: #666; font-size: 13px;">
+    Or copy this link into your browser:<br>
+    <a href="{{ signup_url }}" style="color: #0d9488;">{{ signup_url }}</a>
+  </p>
+  <p style="color: #666; font-size: 13px;">
+    If you did not expect this invitation, you can safely ignore this email.
+  </p>
+  <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+  <p style="color: #999; font-size: 12px; text-align: center;">{{ platform_name }} · <a href="{{ site_url }}" style="color: #999;">{{ site_url }}</a></p>
+</body>
+</html>

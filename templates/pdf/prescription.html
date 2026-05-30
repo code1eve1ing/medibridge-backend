@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: Helvetica, Arial, sans-serif; font-size: 11px; color: #1a1a1a; margin: 0; padding: 20px; }
+  .header-table { width: 100%; border-bottom: 2px solid #0d9488; padding-bottom: 10px; margin-bottom: 14px; }
+  .brand { font-size: 20px; font-weight: bold; color: #0d9488; }
+  .brand-sub { font-size: 10px; color: #555; }
+  .doctor-info { font-size: 11px; text-align: right; color: #333; }
+  h2 { font-size: 13px; color: #0d9488; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px; margin: 14px 0 6px 0; }
+  .patient-table { width: 100%; margin-bottom: 10px; }
+  .patient-table td { padding: 3px 6px; font-size: 11px; }
+  .label { color: #777; width: 110px; }
+  .diagnosis-box { border: 1px solid #ddd; padding: 8px 10px; margin-bottom: 10px; background: #fafafa; }
+  table.medicines { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+  table.medicines th { background: #0d9488; color: #fff; padding: 5px 6px; text-align: left; font-size: 10px; }
+  table.medicines td { padding: 5px 6px; border-bottom: 1px solid #eee; font-size: 10px; vertical-align: top; }
+  table.medicines tr:nth-child(even) td { background: #f9fafb; }
+  .tick { color: #0d9488; font-weight: bold; }
+  .cross { color: #ccc; }
+  table.tests { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+  table.tests th { background: #374151; color: #fff; padding: 5px 6px; text-align: left; font-size: 10px; }
+  table.tests td { padding: 5px 6px; border-bottom: 1px solid #eee; font-size: 10px; }
+  .followup-box { border: 1px solid #0d9488; padding: 6px 10px; color: #0d9488; margin-bottom: 10px; }
+  .notes-box { border: 1px solid #ddd; padding: 8px 10px; background: #fafafa; margin-bottom: 10px; }
+  .footer { border-top: 1px solid #ddd; padding-top: 8px; font-size: 9px; color: #888; }
+  .sig-table { width: 100%; margin-top: 14px; }
+  .sig-cell { text-align: right; font-size: 10px; }
+  .urgent { color: #dc2626; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<table class="header-table">
+  <tr>
+    <td>
+      <div class="brand">MediBridge</div>
+      <div class="brand-sub">Online Medical Consultation Platform</div>
+    </td>
+    <td class="doctor-info">
+      <strong>{{ prescription.appointment.doctor.first_name }} {{ prescription.appointment.doctor.last_name }}</strong><br>
+      {% if prescription.appointment.doctor.medical_council_reg_no %}Reg No: {{ prescription.appointment.doctor.medical_council_reg_no }}<br>{% endif %}
+      {% if prescription.appointment.doctor.hospital_affiliation %}{{ prescription.appointment.doctor.hospital_affiliation }}<br>{% endif %}
+      Consultation Date: {{ prescription.appointment.scheduled_start|date:"d M Y" }}
+    </td>
+  </tr>
+</table>
+
+<!-- Patient Info -->
+<h2>Patient Information</h2>
+<table class="patient-table">
+  <tr>
+    <td class="label">Name</td>
+    <td>{{ prescription.appointment.patient.first_name }} {{ prescription.appointment.patient.last_name }}</td>
+    <td class="label">Date of Birth</td>
+    <td>{{ prescription.appointment.patient.date_of_birth|default:"—" }}</td>
+  </tr>
+  <tr>
+    <td class="label">Gender</td>
+    <td>{{ prescription.appointment.patient.gender|capfirst|default:"—" }}</td>
+    <td class="label">Blood Group</td>
+    <td>{{ prescription.appointment.patient.blood_group|default:"—" }}</td>
+  </tr>
+  {% if prescription.appointment.patient.allergies %}
+  <tr>
+    <td class="label">Allergies</td>
+    <td colspan="3">{{ prescription.appointment.patient.allergies }}</td>
+  </tr>
+  {% endif %}
+</table>
+
+<!-- Diagnosis -->
+<h2>Diagnosis</h2>
+<div class="diagnosis-box">{{ prescription.diagnosis }}</div>
+
+<!-- Medicines -->
+{% if prescription.medicines.all %}
+<h2>Medicines</h2>
+<table class="medicines">
+  <tr>
+    <th style="width:22%">Medicine</th>
+    <th style="width:10%">Dosage</th>
+    <th style="width:4%">M</th>
+    <th style="width:4%">A</th>
+    <th style="width:4%">E</th>
+    <th style="width:4%">N</th>
+    <th style="width:14%">Timing</th>
+    <th style="width:6%">Days</th>
+    <th>Instructions</th>
+  </tr>
+  {% for med in prescription.medicines.all %}
+  <tr>
+    <td>{{ med.medicine_name }}</td>
+    <td>{{ med.dosage }}</td>
+    <td>{% if med.morning %}<span class="tick">✓</span>{% else %}<span class="cross">—</span>{% endif %}</td>
+    <td>{% if med.afternoon %}<span class="tick">✓</span>{% else %}<span class="cross">—</span>{% endif %}</td>
+    <td>{% if med.evening %}<span class="tick">✓</span>{% else %}<span class="cross">—</span>{% endif %}</td>
+    <td>{% if med.night %}<span class="tick">✓</span>{% else %}<span class="cross">—</span>{% endif %}</td>
+    <td>{{ med.get_meal_timing_display }}</td>
+    <td>{{ med.duration_days }}d</td>
+    <td>{{ med.instructions|default:"—" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<!-- Tests -->
+{% if prescription.tests.all %}
+<h2>Recommended Tests</h2>
+<table class="tests">
+  <tr>
+    <th style="width:40%">Test</th>
+    <th style="width:15%">Urgency</th>
+    <th>Instructions</th>
+  </tr>
+  {% for test in prescription.tests.all %}
+  <tr>
+    <td>{{ test.test_name }}</td>
+    <td>{% if test.urgency == "urgent" %}<span class="urgent">URGENT</span>{% else %}Routine{% endif %}</td>
+    <td>{{ test.instructions|default:"—" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<!-- Follow-up -->
+{% if prescription.follow_up_required %}
+<div class="followup-box">
+  Follow-up recommended{% if prescription.follow_up_after_days %} after {{ prescription.follow_up_after_days }} day{{ prescription.follow_up_after_days|pluralize }}{% endif %}.
+</div>
+{% endif %}
+
+<!-- General Notes -->
+{% if prescription.general_notes %}
+<h2>General Notes</h2>
+<div class="notes-box">{{ prescription.general_notes }}</div>
+{% endif %}
+
+<!-- Signature -->
+<table class="sig-table">
+  <tr>
+    <td></td>
+    <td class="sig-cell">
+      {% if prescription.appointment.doctor.signature_image %}
+      <img src="{{ prescription.appointment.doctor.signature_image.path }}" style="max-height:50px; max-width:150px;"><br>
+      {% endif %}
+      <strong>Dr. {{ prescription.appointment.doctor.first_name }} {{ prescription.appointment.doctor.last_name }}</strong><br>
+      {% if prescription.appointment.doctor.medical_council_reg_no %}Reg No: {{ prescription.appointment.doctor.medical_council_reg_no }}{% endif %}
+    </td>
+  </tr>
+</table>
+
+<!-- Footer -->
+<div class="footer">
+  This prescription was issued via MediBridge. It is valid only for the diagnosis stated above.
+  MediBridge is not responsible for misuse of this document.
+  Generated on {{ prescription.created_at|date:"d M Y, H:i" }} UTC.
+</div>
+
+</body>
+</html>

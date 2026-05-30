@@ -1,0 +1,12 @@
+Your prescription is ready — MediBridge
+
+Hi {{ appointment.patient.first_name }},
+
+Dr. {{ doctor.first_name }} {{ doctor.last_name }} has written a prescription for your consultation on {{ appointment.scheduled_start|date:"d M Y" }}.
+
+Diagnosis: {{ prescription.diagnosis }}
+
+Log in to MediBridge to view the full prescription and download it as a PDF.
+
+---
+MediBridge — Online Medical Consultations

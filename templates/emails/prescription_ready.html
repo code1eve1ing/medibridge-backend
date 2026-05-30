@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Your Prescription is Ready</title></head>
+<body style="font-family:Arial,sans-serif;background:#f4f4f5;margin:0;padding:32px;">
+  <div style="max-width:520px;margin:0 auto;background:#fff;border-radius:8px;padding:32px;border:1px solid #e4e4e7;">
+    <h2 style="color:#18181b;margin-top:0;">Your prescription is ready</h2>
+    <p style="color:#52525b;">Hi {{ appointment.patient.first_name }},</p>
+    <p style="color:#52525b;">
+      Dr. {{ doctor.first_name }} {{ doctor.last_name }} has written a prescription for your consultation on
+      {{ appointment.scheduled_start|date:"d M Y" }}.
+    </p>
+    <p style="color:#52525b;"><strong>Diagnosis:</strong> {{ prescription.diagnosis }}</p>
+    <p style="color:#52525b;">Log in to MediBridge to view the full prescription and download it as a PDF.</p>
+    <hr style="border:none;border-top:1px solid #e4e4e7;margin:24px 0;">
+    <p style="color:#a1a1aa;font-size:12px;margin:0;">MediBridge — Online Medical Consultations</p>
+  </div>
+</body>
+</html>

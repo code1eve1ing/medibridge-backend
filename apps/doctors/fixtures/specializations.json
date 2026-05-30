@@ -1,0 +1,20 @@
+[
+  {"model": "doctors.specialization", "pk": 1, "fields": {"name": "Cardiology", "slug": "cardiology"}},
+  {"model": "doctors.specialization", "pk": 2, "fields": {"name": "Dermatology", "slug": "dermatology"}},
+  {"model": "doctors.specialization", "pk": 3, "fields": {"name": "Endocrinology", "slug": "endocrinology"}},
+  {"model": "doctors.specialization", "pk": 4, "fields": {"name": "ENT", "slug": "ent"}},
+  {"model": "doctors.specialization", "pk": 5, "fields": {"name": "Family Medicine", "slug": "family-medicine"}},
+  {"model": "doctors.specialization", "pk": 6, "fields": {"name": "Gastroenterology", "slug": "gastroenterology"}},
+  {"model": "doctors.specialization", "pk": 7, "fields": {"name": "General Surgery", "slug": "general-surgery"}},
+  {"model": "doctors.specialization", "pk": 8, "fields": {"name": "Gynecology", "slug": "gynecology"}},
+  {"model": "doctors.specialization", "pk": 9, "fields": {"name": "Internal Medicine", "slug": "internal-medicine"}},
+  {"model": "doctors.specialization", "pk": 10, "fields": {"name": "Nephrology", "slug": "nephrology"}},
+  {"model": "doctors.specialization", "pk": 11, "fields": {"name": "Neurology", "slug": "neurology"}},
+  {"model": "doctors.specialization", "pk": 12, "fields": {"name": "Oncology", "slug": "oncology"}},
+  {"model": "doctors.specialization", "pk": 13, "fields": {"name": "Ophthalmology", "slug": "ophthalmology"}},
+  {"model": "doctors.specialization", "pk": 14, "fields": {"name": "Orthopedics", "slug": "orthopedics"}},
+  {"model": "doctors.specialization", "pk": 15, "fields": {"name": "Pediatrics", "slug": "pediatrics"}},
+  {"model": "doctors.specialization", "pk": 16, "fields": {"name": "Psychiatry", "slug": "psychiatry"}},
+  {"model": "doctors.specialization", "pk": 17, "fields": {"name": "Pulmonology", "slug": "pulmonology"}},
+  {"model": "doctors.specialization", "pk": 18, "fields": {"name": "Urology", "slug": "urology"}}
+]

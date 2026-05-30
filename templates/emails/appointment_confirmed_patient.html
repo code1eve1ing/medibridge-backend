@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Appointment Confirmed</title></head>
+<body style="font-family:Arial,sans-serif;background:#f4f4f5;margin:0;padding:32px;">
+  <div style="max-width:520px;margin:0 auto;background:#fff;border-radius:8px;padding:32px;border:1px solid #e4e4e7;">
+    <h2 style="color:#18181b;margin-top:0;">Your appointment is confirmed</h2>
+    <p style="color:#52525b;">Hi {{ patient.first_name }},</p>
+    <p style="color:#52525b;">Your consultation has been scheduled. Here are the details:</p>
+
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+      <tr>
+        <td style="padding:8px 0;color:#71717a;font-size:13px;width:120px;">Doctor</td>
+        <td style="padding:8px 0;color:#18181b;font-size:13px;">Dr. {{ doctor.first_name }} {{ doctor.last_name }}</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 0;color:#71717a;font-size:13px;">Date &amp; Time</td>
+        <td style="padding:8px 0;color:#18181b;font-size:13px;">{{ appointment.scheduled_start }}</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 0;color:#71717a;font-size:13px;">Payment Ref</td>
+        <td style="padding:8px 0;color:#18181b;font-size:13px;font-family:monospace;">{{ appointment.payment_ref }}</td>
+      </tr>
+    </table>
+
+    <p style="color:#52525b;margin-top:24px;">Join your consultation using the button below. The link becomes active 15 minutes before your appointment.</p>
+
+    <div style="text-align:center;margin:28px 0;">
+      <a href="{{ meeting_link }}"
+         style="display:inline-block;background:#0d9488;color:#fff;text-decoration:none;padding:12px 28px;border-radius:6px;font-weight:600;font-size:15px;">
+        Join Consultation
+      </a>
+    </div>
+
+    <p style="color:#71717a;font-size:12px;">Or copy this link: <a href="{{ meeting_link }}" style="color:#0d9488;">{{ meeting_link }}</a></p>
+
+    <hr style="border:none;border-top:1px solid #e4e4e7;margin:24px 0;">
+    <p style="color:#a1a1aa;font-size:12px;margin:0;">MediBridge — Online Medical Consultations</p>
+  </div>
+</body>
+</html>

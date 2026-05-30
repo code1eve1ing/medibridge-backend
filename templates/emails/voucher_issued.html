@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"/></head>
+<body style="font-family:Arial,sans-serif;color:#1a1a1a;max-width:600px;margin:0 auto;padding:20px;">
+  <h2 style="color:#0d9488;">Your Surgery Voucher is Ready</h2>
+  <p>Hi {{ patient.first_name }},</p>
+  <p>Your surgery booking with <strong>{{ booking.package.hospital.name }}</strong> has been confirmed.
+  Your voucher PDF is attached to this email.</p>
+  <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+    <tr><td style="padding:6px 0;color:#6b7280;">Package</td><td style="font-weight:bold;">{{ booking.package.name }}</td></tr>
+    <tr><td style="padding:6px 0;color:#6b7280;">Hospital</td><td>{{ booking.package.hospital.name }}, {{ booking.package.hospital.city }}</td></tr>
+    <tr><td style="padding:6px 0;color:#6b7280;">Tentative Date</td><td>{{ booking.tentative_date }}</td></tr>
+    <tr><td style="padding:6px 0;color:#6b7280;">Voucher Code</td><td style="font-family:monospace;font-weight:bold;color:#0d9488;">{{ coupon.code }}</td></tr>
+  </table>
+  <p>Please present the attached voucher PDF when you arrive at the hospital.</p>
+  <p style="color:#6b7280;font-size:12px;">MediBridge — Online Medical Consultations</p>
+</body>
+</html>

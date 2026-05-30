@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family:sans-serif;color:#18181b;max-width:480px;margin:0 auto;padding:24px">
+<h2 style="font-size:18px;margin-bottom:8px">Your consultation request has been matched</h2>
+<p style="color:#52525b;font-size:14px">
+  Great news! Our team has matched your consultation request to a doctor on {{ platform_name }}.
+</p>
+<table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:16px">
+  <tr><td style="padding:6px 0;color:#71717a;width:40%">Doctor</td><td>Dr. {{ doctor.first_name }} {{ doctor.last_name }}</td></tr>
+  {% if intake.admin_notes %}
+  <tr><td style="padding:6px 0;color:#71717a">Note</td><td>{{ intake.admin_notes }}</td></tr>
+  {% endif %}
+</table>
+<p style="color:#52525b;font-size:14px;margin-top:16px">
+  Log in to your account to view available slots and book your appointment.
+</p>
+<p style="margin-top:24px;font-size:14px">
+  <a href="{{ site_url }}/patient/symptoms/history" style="color:#0d9488">View your requests →</a>
+</p>
+</body>
+</html>

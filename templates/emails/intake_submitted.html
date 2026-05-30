@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family:sans-serif;color:#18181b;max-width:480px;margin:0 auto;padding:24px">
+<h2 style="font-size:18px;margin-bottom:8px">New symptom intake submitted</h2>
+<p style="color:#52525b;font-size:14px">A patient has submitted a new consultation request on {{ platform_name }}.</p>
+<table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:16px">
+  <tr><td style="padding:6px 0;color:#71717a;width:40%">Patient</td><td>{{ patient.user.email }}</td></tr>
+  <tr><td style="padding:6px 0;color:#71717a">Severity</td><td>{{ intake.severity|title }}</td></tr>
+  <tr><td style="padding:6px 0;color:#71717a">Chief complaint</td><td>{{ intake.chief_complaint }}</td></tr>
+  <tr><td style="padding:6px 0;color:#71717a">Duration</td><td>{{ intake.duration }}</td></tr>
+</table>
+<p style="margin-top:24px;font-size:14px">
+  <a href="{{ site_url }}/admin/intakes" style="color:#0d9488">Review in admin panel →</a>
+</p>
+</body>
+</html>

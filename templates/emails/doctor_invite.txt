@@ -1,0 +1,15 @@
+You've been invited to join {{ platform_name }}
+
+Hi there,
+
+You have been invited by {{ invited_by.email }} to join {{ platform_name }} as a doctor.
+{{ platform_name }} connects patients from Canada, the US, and the UK with qualified Indian doctors for online consultations.
+
+Click the link below to complete your registration. This invitation expires in 7 days.
+
+{{ signup_url }}
+
+If you did not expect this invitation, you can safely ignore this email.
+
+---
+{{ platform_name }} · {{ site_url }}

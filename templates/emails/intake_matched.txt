@@ -1,0 +1,8 @@
+Your consultation request has been matched — {{ platform_name }}
+
+Great news! Our team has matched your request to Dr. {{ doctor.first_name }} {{ doctor.last_name }}.
+{% if intake.admin_notes %}
+Note from our team: {{ intake.admin_notes }}
+{% endif %}
+Log in to view available slots and book your appointment:
+{{ site_url }}/patient/symptoms/history

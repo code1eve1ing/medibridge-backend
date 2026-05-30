@@ -1,0 +1,16 @@
+Your Surgery Voucher is Ready — MediBridge
+
+Hi {{ patient.first_name }},
+
+Your surgery booking with {{ booking.package.hospital.name }} has been confirmed.
+Your voucher PDF is attached to this email.
+
+Package: {{ booking.package.name }}
+Hospital: {{ booking.package.hospital.name }}, {{ booking.package.hospital.city }}
+Tentative Date: {{ booking.tentative_date }}
+Voucher Code: {{ coupon.code }}
+
+Please present the attached voucher PDF when you arrive at the hospital.
+
+---
+MediBridge — Online Medical Consultations
